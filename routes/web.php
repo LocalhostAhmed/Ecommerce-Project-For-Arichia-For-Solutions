@@ -17,4 +17,39 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+
+
+Route::get('/home', function () {
+    return view('main_pages.home');
+});
+
+
+Route::get('/products', function () {
+    return view('main_pages.products');
+});
+
+
+Route::get('/category', function () {
+    return view('main_pages.category');
+});
+
+
+Route::get('/search_page', function () {
+    return view('main_pages.search_page');
+});
+
+
+Route::get('/product_details', function () {
+    return view('main_pages.product_details');
+});
+
+
+Route::get('/brands', function () {
+    return view('main_pages.Brands');
+});
+
+
+Route::get('/brand_products', function () {
+    return view('main_pages.Brands_products');
+});
