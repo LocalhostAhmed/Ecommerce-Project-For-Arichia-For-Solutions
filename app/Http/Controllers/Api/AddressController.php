@@ -12,10 +12,7 @@ use Throwable;
 
 class AddressController extends Controller
 {
-    /**
-     * GET /api/addresses
-     * List the authenticated user's addresses.
-     */
+
     public function index(Request $request)
     {
         $addresses = $request->user()
@@ -30,10 +27,7 @@ class AddressController extends Controller
         ]);
     }
 
-    /**
-     * POST /api/addresses
-     * Create an address.
-     */
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -150,10 +144,7 @@ class AddressController extends Controller
         }
     }
 
-    /**
-     * GET /api/addresses/{address}
-     * View one address belonging to the authenticated user.
-     */
+
     public function show(Request $request, string $address)
     {
         $address = $request->user()
@@ -167,10 +158,7 @@ class AddressController extends Controller
         ]);
     }
 
-    /**
-     * PATCH /api/addresses/{address}
-     * Update an owned address.
-     */
+
     public function update(Request $request, string $address)
     {
         $address = $request->user()
@@ -298,10 +286,7 @@ class AddressController extends Controller
         }
     }
 
-    /**
-     * PATCH /api/addresses/{address}/default
-     * Set the default shipping or billing address.
-     */
+
     public function setDefault(Request $request, string $address)
     {
         $validated = $request->validate([
@@ -364,10 +349,6 @@ class AddressController extends Controller
         }
     }
 
-    /**
-     * DELETE /api/addresses/{address}
-     * Delete an owned address.
-     */
     public function destroy(Request $request, string $address)
     {
         $user = $request->user();

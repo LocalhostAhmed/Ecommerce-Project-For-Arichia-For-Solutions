@@ -18,10 +18,6 @@ class ReviewController extends Controller
         protected ReviewService $reviewService
     ) {}
 
-    /**
-     * GET /api/products/{product}/reviews
-     * Public: list approved reviews for a product, with stats.
-     */
     public function index(Request $request, Product $product)
     {
         try {
@@ -69,10 +65,7 @@ class ReviewController extends Controller
         }
     }
 
-    /**
-     * POST /api/products/{product}/reviews
-     * Auth: create a review.
-     */
+
     public function store(Request $request, Product $product)
     {
         try {
@@ -112,10 +105,6 @@ class ReviewController extends Controller
         }
     }
 
-    /**
-     * PUT /api/reviews/{review}
-     * Author: edit own review.
-     */
     public function update(Request $request, Review $review)
     {
         try {
@@ -160,10 +149,6 @@ class ReviewController extends Controller
         }
     }
 
-    /**
-     * DELETE /api/reviews/{review}
-     * Author: delete own review.
-     */
     public function destroy(Request $request, Review $review)
     {
         try {
@@ -194,10 +179,6 @@ class ReviewController extends Controller
         }
     }
 
-    /**
-     * GET /api/reviews/mine
-     * Auth: all reviews written by the current user.
-     */
     public function mine(Request $request)
     {
         try {
@@ -237,10 +218,6 @@ class ReviewController extends Controller
         }
     }
 
-    /**
-     * POST /api/reviews/{review}/helpful
-     * Auth: mark as helpful.
-     */
     public function helpful(Request $request, Review $review)
     {
         try {

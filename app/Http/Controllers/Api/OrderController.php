@@ -17,10 +17,7 @@ class OrderController extends Controller
         protected OrderService $orderService
     ) {}
 
-    /**
-     * GET /api/orders
-     * Paginated order history for the authenticated user.
-     */
+
     public function index(Request $request)
     {
         try {
@@ -69,10 +66,6 @@ class OrderController extends Controller
         }
     }
 
-    /**
-     * GET /api/orders/{order}
-     * Show one order — must belong to the user.
-     */
     public function show(Request $request, Order $order)
     {
         try {
@@ -103,10 +96,7 @@ class OrderController extends Controller
         }
     }
 
-    /**
-     * GET /api/orders/{order}/tracking
-     * Status tracking timeline.
-     */
+
     public function tracking(Request $request, Order $order)
     {
         try {
@@ -149,9 +139,7 @@ class OrderController extends Controller
         }
     }
 
-    /**
-     * POST /api/orders/{order}/cancel
-     */
+
     public function cancel(Request $request, Order $order)
     {
         try {

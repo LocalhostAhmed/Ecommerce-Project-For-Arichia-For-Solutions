@@ -23,9 +23,6 @@ class ProductImageController extends Controller
         return asset('storage/' . ltrim($path, '/'));
     }
 
-    /**
-     * GET /api/products/{product}/images
-     */
     public function index(Product $product)
     {
         $images = $product->images()->get();
@@ -43,9 +40,6 @@ class ProductImageController extends Controller
         ]);
     }
 
-    /**
-     * POST /api/products/{product}/images
-     */
     public function store(Request $request, Product $product)
     {
         $validated = $request->validate([
@@ -154,9 +148,6 @@ class ProductImageController extends Controller
         }
     }
 
-    /**
-     * PATCH /api/products/{product}/images/{image}/primary
-     */
     public function setPrimary(Product $product, ProductImage $image)
     {
         if ($image->product_id !== $product->id) {
@@ -202,9 +193,6 @@ class ProductImageController extends Controller
         }
     }
 
-    /**
-     * DELETE /api/products/{product}/images/{image}
-     */
     public function destroy(Product $product, ProductImage $image)
     {
         if ($image->product_id !== $product->id) {

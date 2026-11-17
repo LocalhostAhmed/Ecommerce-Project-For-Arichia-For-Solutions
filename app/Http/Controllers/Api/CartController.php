@@ -18,9 +18,7 @@ class CartController extends Controller
         protected CartService $cartService
     ) {}
 
-    /**
-     * Resolve the cart for this request (user or guest token).
-     */
+
     protected function resolveCart(Request $request): Cart
     {
         return $this->cartService->resolveCart(
@@ -29,10 +27,7 @@ class CartController extends Controller
         );
     }
 
-    /**
-     * GET /api/cart
-     * View the current cart.
-     */
+
     public function show(Request $request)
     {
         try {
@@ -57,10 +52,7 @@ class CartController extends Controller
         }
     }
 
-    /**
-     * POST /api/cart/items
-     * Add a product to the cart.
-     */
+
     public function addItem(Request $request)
     {
         try {
@@ -109,10 +101,7 @@ class CartController extends Controller
         }
     }
 
-    /**
-     * PUT /api/cart/items/{item}
-     * Update the quantity of a cart item.
-     */
+
     public function updateItem(Request $request, CartItem $item)
     {
         try {
@@ -160,10 +149,7 @@ class CartController extends Controller
         }
     }
 
-    /**
-     * DELETE /api/cart/items/{item}
-     * Remove a single item from the cart.
-     */
+
     public function removeItem(Request $request, CartItem $item)
     {
         try {
@@ -194,10 +180,6 @@ class CartController extends Controller
         }
     }
 
-    /**
-     * DELETE /api/cart
-     * Clear the entire cart.
-     */
     public function clear(Request $request)
     {
         try {
@@ -227,10 +209,7 @@ class CartController extends Controller
         }
     }
 
-    /**
-     * GET /api/cart/subtotal
-     * Lightweight endpoint that only returns totals.
-     */
+
     public function subtotal(Request $request)
     {
         try {
@@ -264,11 +243,7 @@ class CartController extends Controller
         }
     }
 
-    /**
-     * POST /api/cart/merge
-     * Merge a guest cart into the current logged-in user's cart.
-     * Call this after login.
-     */
+
     public function merge(Request $request)
     {
         try {

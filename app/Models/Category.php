@@ -32,4 +32,10 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+
+    public function children(): HasMany
+    {
+        return $this->hasMany(Category::class, 'admin_id');
+    }
 }

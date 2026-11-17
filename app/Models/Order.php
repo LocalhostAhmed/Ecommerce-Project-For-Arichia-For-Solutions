@@ -86,4 +86,9 @@ class Order extends Model
     {
         return in_array($this->status, ['delivered', 'cancelled'], true);
     }
+
+    public function returns(): HasMany
+    {
+        return $this->hasMany(ReturnRequest::class, 'order_id');
+    }
 }

@@ -15,9 +15,7 @@ use Throwable;
 
 class AuthController extends Controller
 {
-    /**
-     * Register a new user.
-     */
+
     public function register(Request $request): JsonResponse
     {
         try {
@@ -33,8 +31,7 @@ class AuthController extends Controller
                 'password' => [
                     'required',
                     'string',
-                    'min:8',
-                    'confirmed',
+                    'min:8'
                 ],
                 'address' => ['required', 'string', 'max:255']
             ]);
@@ -89,9 +86,6 @@ class AuthController extends Controller
         }
     }
 
-    /**
-     * Authenticate a user and issue a Sanctum token.
-     */
     public function login(Request $request): JsonResponse
     {
         try {
@@ -116,15 +110,6 @@ class AuthController extends Controller
                     'success' => false,
                     'message' => 'Invalid email or password.',
                 ], 401);
-            }
-
-            // Do not issue tokens to unverified users.
-            if (!$user->hasVerifiedEmail()) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Please verify your email before logging in.',
-                    'email_verified' => false,
-                ], 403);
             }
 
             $token = $user->createToken('auth-token')->plainTextToken;
@@ -156,106 +141,7 @@ class AuthController extends Controller
         }
     }
 
-    /**
-     * Verify a user's email using a signed URL.
-     */
-    public function verifyEmail(
-        Request $request,
-        string $id,
-        string $hash
-    ): JsonResponse {
-        try {
-            $user = User::find($id);
 
-            if (!$user) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'User not found.',
-                ], 404);
-            }
-
-            // Verify that the URL hash matches the user's email.
-            if (!hash_equals(sha1($user->getEmailForVerification()), $hash)) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Invalid email verification link.',
-                ], 403);
-            }
-
-            if ($user->hasVerifiedEmail()) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Email address has already been verified.',
-                ], 200);
-            }
-
-            // The signed middleware validates the URL signature.
-            $user->markEmailAsVerified();
-
-            event(new Verified($user));
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Email verified successfully. You can now log in.',
-                'email_verified' => true,
-            ], 200);
-        } catch (Throwable $exception) {
-            Log::error('Email verification failed.', [
-                'user_id' => $id,
-                'exception' => $exception->getMessage(),
-            ]);
-
-            return response()->json([
-                'success' => false,
-                'message' => 'An unexpected error occurred during email verification.',
-            ], 500);
-        }
-    }
-
-    /**
-     * Resend the email verification notification.
-     */
-    public function resendVerificationEmail(
-        Request $request
-    ): JsonResponse {
-        try {
-            $user = $request->user();
-
-            if (!$user) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Unauthenticated.',
-                ], 401);
-            }
-
-            if ($user->hasVerifiedEmail()) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Your email is already verified.',
-                ], 409);
-            }
-
-            $user->sendEmailVerificationNotification();
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Verification email sent successfully.',
-            ], 200);
-        } catch (Throwable $exception) {
-            Log::error('Resending verification email failed.', [
-                'exception' => $exception->getMessage(),
-            ]);
-
-            return response()->json([
-                'success' => false,
-                'message' => 'Unable to send the verification email. Please try again later.',
-            ], 500);
-        }
-    }
-
-    /**
-     * Revoke the current API token.
-     */
     public function logout(Request $request): JsonResponse
     {
         try {
@@ -295,9 +181,7 @@ class AuthController extends Controller
         }
     }
 
-    /**
-     * Return the authenticated user's profile.
-     */
+
     public function profile(Request $request): JsonResponse
     {
         try {
@@ -305,8 +189,6 @@ class AuthController extends Controller
                 'success' => true,
                 'data' => [
                     'user' => $request->user(),
-                    'email_verified' => $request->user()
-                        ->hasVerifiedEmail(),
                 ],
             ], 200);
         } catch (Throwable $exception) {

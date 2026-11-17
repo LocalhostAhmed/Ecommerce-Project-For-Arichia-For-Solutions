@@ -15,17 +15,9 @@ use Throwable;
 
 class ProductController extends Controller
 {
-    /**
-     * GET: Retrieve all products.
-     */
     public function index(Request $request)
     {
         try {
-            /*
-            |------------------------------------------------------------------
-            | 1. Validate query parameters
-            |------------------------------------------------------------------
-            */
             $validated = $request->validate([
                 'search' => ['sometimes', 'nullable', 'string', 'max:255'],
 
@@ -71,12 +63,6 @@ class ProductController extends Controller
 
                 'page' => ['sometimes', 'nullable', 'integer', 'min:1'],
             ]);
-
-            /*
-            |------------------------------------------------------------------
-            | 2. Base query — active products only, relationships eager-loaded
-            |------------------------------------------------------------------
-            */
             $query = Product::query()->where('is_active', true);
 
             $query->with([
@@ -85,11 +71,6 @@ class ProductController extends Controller
                 'primaryImage',
             ]);
 
-            /*
-            |------------------------------------------------------------------
-            | 3. Search by name OR description
-            |------------------------------------------------------------------
-            */
             if (! empty($validated['search'])) {
                 $search = trim($validated['search']);
 
@@ -99,21 +80,9 @@ class ProductController extends Controller
                         ->orWhere('description', 'like', "%{$search}%");
                 });
             }
-
-            /*
-            |------------------------------------------------------------------
-            | 4. Filter by category
-            |------------------------------------------------------------------
-            */
             if (! empty($validated['category_id'])) {
                 $query->where('category_id', $validated['category_id']);
             }
-
-            /*
-            |------------------------------------------------------------------
-            | 5. Filter by price range
-            |------------------------------------------------------------------
-            */
             if (isset($validated['min_price'])) {
                 $query->where('price', '>=', $validated['min_price']);
             }
@@ -121,12 +90,6 @@ class ProductController extends Controller
             if (isset($validated['max_price'])) {
                 $query->where('price', '<=', $validated['max_price']);
             }
-
-            /*
-            |------------------------------------------------------------------
-            | 6. Sorting
-            |------------------------------------------------------------------
-            */
             $sortBy    = $validated['sort_by'] ?? 'date';
             $sortOrder = $validated['sort_order'] ?? 'desc';
 
@@ -148,20 +111,11 @@ class ProductController extends Controller
 
             $query->orderBy('id', 'desc');
 
-            /*
-            |------------------------------------------------------------------
-            | 7. Pagination
-            |------------------------------------------------------------------
-            */
+
             $products = $query
                 ->paginate($validated['per_page'] ?? 10)
                 ->withQueryString();
 
-            /*
-            |------------------------------------------------------------------
-            | 8. Response
-            |------------------------------------------------------------------
-            */
             return response()->json([
                 'success' => true,
                 'message' => 'Products retrieved successfully.',
@@ -209,9 +163,7 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     * POST: Create a product.
-     */
+
     public function store(Request $request)
     {
         try {
@@ -281,9 +233,7 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     * GET: Retrieve one product.
-     */
+
     public function show(Product $product)
     {
         try {
@@ -305,9 +255,6 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     * PUT/PATCH: Update a product.
-     */
     public function update(Request $request, Product $product)
     {
         try {
@@ -392,9 +339,6 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     * DELETE: Delete a product.
-     */
     public function destroy(Product $product)
     {
         try {
@@ -417,12 +361,6 @@ class ProductController extends Controller
         }
     }
 
-
-    /**
-     * GET /api/products
-     *
-     * Search, filter, sort, and paginate products.
-     */
     public function index1(Request $request)
     {
         try {
@@ -491,20 +429,10 @@ class ProductController extends Controller
                 });
             }
 
-            /*
-            |------------------------------------------------------------------
-            | 4. Filter by category
-            |------------------------------------------------------------------
-            */
             if (!empty($validated['category_id'])) {
                 $query->where('category_id', $validated['category_id']);
             }
 
-            /*
-            |------------------------------------------------------------------
-            | 5. Filter by price range
-            |------------------------------------------------------------------
-            */
             if (isset($validated['min_price'])) {
                 $query->where('price', '>=', $validated['min_price']);
             }
@@ -512,12 +440,6 @@ class ProductController extends Controller
             if (isset($validated['max_price'])) {
                 $query->where('price', '<=', $validated['max_price']);
             }
-
-            /*
-            |------------------------------------------------------------------
-            | 6. Sorting
-            |------------------------------------------------------------------
-            */
             $sortBy    = $validated['sort_by'] ?? 'date';
             $sortOrder = $validated['sort_order'] ?? 'desc';
 
@@ -591,9 +513,6 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     * POST /api/products
-     */
     public function store1(Request $request)
     {
         try {
@@ -655,10 +574,6 @@ class ProductController extends Controller
             ], 500);
         }
     }
-
-    /**
-     * GET /api/products/{product}
-     */
     public function show1(Product $product)
     {
         try {
@@ -686,9 +601,6 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     * PUT/PATCH /api/products/{product}
-     */
     public function update1(Request $request, Product $product)
     {
         try {
@@ -757,9 +669,6 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     * DELETE /api/products/{product}
-     */
     public function destroy1(Product $product)
     {
         try {

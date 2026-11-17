@@ -34,7 +34,7 @@ return new class extends Migration
             $table->text('moderation_note')->nullable();
             $table->foreignId('moderated_by')
                 ->nullable()
-                ->constrained('users')
+                ->constrained('admins')
                 ->nullOnDelete();
             $table->timestamp('moderated_at')->nullable();
 

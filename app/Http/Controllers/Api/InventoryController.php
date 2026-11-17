@@ -17,10 +17,7 @@ class InventoryController extends Controller
         protected InventoryService $inventoryService
     ) {}
 
-    /**
-     * GET /api/products/{product}/inventory
-     * Show current stock + recent movements for one product.
-     */
+
     public function show(Product $product)
     {
         try {
@@ -56,10 +53,7 @@ class InventoryController extends Controller
         }
     }
 
-    /**
-     * POST /api/products/{product}/inventory/add
-     * Add stock.
-     */
+
     public function add(Request $request, Product $product)
     {
         try {
@@ -102,10 +96,7 @@ class InventoryController extends Controller
         }
     }
 
-    /**
-     * POST /api/products/{product}/inventory/remove
-     * Remove stock.
-     */
+
     public function remove(Request $request, Product $product)
     {
         try {
@@ -148,10 +139,7 @@ class InventoryController extends Controller
         }
     }
 
-    /**
-     * PUT /api/products/{product}/inventory
-     * Set an absolute stock value.
-     */
+
     public function set(Request $request, Product $product)
     {
         try {
@@ -194,10 +182,7 @@ class InventoryController extends Controller
         }
     }
 
-    /**
-     * POST /api/inventory/bulk-update
-     * Update stock for multiple products in one request.
-     */
+
     public function bulkUpdate(Request $request)
     {
         try {
@@ -266,10 +251,7 @@ class InventoryController extends Controller
         }
     }
 
-    /**
-     * GET /api/inventory/movements
-     * List inventory movements (audit log).
-     */
+
     public function movements(Request $request)
     {
         try {

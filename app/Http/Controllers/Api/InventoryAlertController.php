@@ -14,9 +14,8 @@ class InventoryAlertController extends Controller
         protected InventoryService $inventoryService
     ) {}
 
-    /**
-     * GET /api/inventory/low-stock
-     */
+
+
     public function lowStock(Request $request)
     {
         try {
@@ -46,9 +45,7 @@ class InventoryAlertController extends Controller
         }
     }
 
-    /**
-     * GET /api/inventory/out-of-stock
-     */
+
     public function outOfStock(Request $request)
     {
         try {
@@ -78,10 +75,7 @@ class InventoryAlertController extends Controller
         }
     }
 
-    /**
-     * GET /api/inventory/summary
-     * Counts of low-stock, out-of-stock, and total inventory value.
-     */
+
     public function summary()
     {
         try {

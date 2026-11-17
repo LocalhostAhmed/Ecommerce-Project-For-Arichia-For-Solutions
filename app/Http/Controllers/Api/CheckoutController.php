@@ -20,10 +20,6 @@ class CheckoutController extends Controller
         protected OrderService $orderService,
     ) {}
 
-    /**
-     * POST /api/checkout/preview
-     * Validate cart + address and return totals without creating an order.
-     */
     public function preview(Request $request)
     {
         try {
@@ -108,11 +104,7 @@ class CheckoutController extends Controller
         }
     }
 
-    /**
-     * POST /api/checkout
-     * Create the order.
-     * Requires header: Idempotency-Key (recommended, not required).
-     */
+
     public function place(Request $request)
     {
         try {

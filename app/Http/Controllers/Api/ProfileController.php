@@ -21,9 +21,6 @@ class ProfileController extends Controller
         return asset('storage/' . ltrim($path, '/'));
     }
 
-    /**
-     * View the authenticated user's profile.
-     */
     public function show(Request $request)
     {
         $user = $request->user();
@@ -44,9 +41,6 @@ class ProfileController extends Controller
         ]);
     }
 
-    /**
-     * Update the authenticated user's own profile.
-     */
     public function update(Request $request)
     {
         $user = $request->user();

@@ -12,9 +12,7 @@ use Throwable;
 
 class CategoryController extends Controller
 {
-    /**
-     * GET: Retrieve all categories.
-     */
+
     public function index()
     {
         try {
@@ -39,9 +37,7 @@ class CategoryController extends Controller
         }
     }
 
-    /**
-     * POST: Create a category.
-     */
+
     public function store(Request $request)
     {
         try {
@@ -99,9 +95,6 @@ class CategoryController extends Controller
         }
     }
 
-    /**
-     * GET: Retrieve one category and its products.
-     */
     public function show(Category $category)
     {
         try {
@@ -125,9 +118,7 @@ class CategoryController extends Controller
         }
     }
 
-    /**
-     * PUT/PATCH: Update a category.
-     */
+
     public function update(
         Request $request,
         Category $category
@@ -194,9 +185,7 @@ class CategoryController extends Controller
         }
     }
 
-    /**
-     * DELETE: Delete a category without products.
-     */
+
     public function destroy(Category $category)
     {
         try {

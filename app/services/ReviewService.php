@@ -146,7 +146,7 @@ class ReviewService
     public function moderate(
         Review $review,
         string $newStatus,
-        User $moderator,
+        $moderator,
         ?string $note = null
     ): Review {
         if (!in_array($newStatus, ['approved', 'rejected'], true)) {

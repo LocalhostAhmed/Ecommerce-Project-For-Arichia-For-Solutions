@@ -17,9 +17,7 @@ class OrderAdminController extends Controller
         protected OrderService $orderService
     ) {}
 
-    /**
-     * GET /api/admin/orders
-     */
+
     public function index(Request $request)
     {
         try {
@@ -74,9 +72,7 @@ class OrderAdminController extends Controller
         }
     }
 
-    /**
-     * PATCH /api/admin/orders/{order}/status
-     */
+
     public function updateStatus(Request $request, Order $order)
     {
         try {

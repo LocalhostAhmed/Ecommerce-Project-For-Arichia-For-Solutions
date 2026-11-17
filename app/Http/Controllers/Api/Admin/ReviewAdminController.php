@@ -17,10 +17,6 @@ class ReviewAdminController extends Controller
         protected ReviewService $reviewService
     ) {}
 
-    /**
-     * GET /api/admin/reviews
-     * List reviews with filters: status, product_id, rating.
-     */
     public function index(Request $request)
     {
         try {
@@ -73,10 +69,6 @@ class ReviewAdminController extends Controller
         }
     }
 
-    /**
-     * PATCH /api/admin/reviews/{review}/moderate
-     * Approve or reject a review.
-     */
     public function moderate(Request $request, Review $review)
     {
         try {
@@ -113,10 +105,7 @@ class ReviewAdminController extends Controller
         }
     }
 
-    /**
-     * DELETE /api/admin/reviews/{review}
-     * Admin: delete any review.
-     */
+
     public function destroy(Request $request, Review $review)
     {
         try {
@@ -140,10 +129,7 @@ class ReviewAdminController extends Controller
         }
     }
 
-    /**
-     * GET /api/admin/reviews/pending/count
-     * Small utility for admin dashboards.
-     */
+
     public function pendingCount()
     {
         try {

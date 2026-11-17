@@ -18,10 +18,7 @@ class WishlistController extends Controller
         protected CartService $cartService,
     ) {}
 
-    /**
-     * GET /api/wishlist
-     * View the authenticated user's wishlist.
-     */
+
     public function index(Request $request)
     {
         try {
@@ -45,10 +42,6 @@ class WishlistController extends Controller
         }
     }
 
-    /**
-     * POST /api/wishlist/items
-     * Add a product to the wishlist.
-     */
     public function store(Request $request)
     {
         try {
@@ -85,10 +78,7 @@ class WishlistController extends Controller
         }
     }
 
-    /**
-     * DELETE /api/wishlist/items/{product}
-     * Remove a product from the wishlist.
-     */
+
     public function destroy(Request $request, Product $product)
     {
         try {
@@ -117,10 +107,7 @@ class WishlistController extends Controller
         }
     }
 
-    /**
-     * POST /api/wishlist/items/{product}/move-to-cart
-     * Move a product from wishlist into the user's cart.
-     */
+
     public function moveToCart(Request $request, Product $product)
     {
         try {

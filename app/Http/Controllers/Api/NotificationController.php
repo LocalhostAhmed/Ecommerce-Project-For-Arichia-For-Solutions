@@ -9,10 +9,7 @@ use Throwable;
 
 class NotificationController extends Controller
 {
-    /**
-     * GET /api/notifications
-     * List the user's database notifications.
-     */
+
     public function index(Request $request)
     {
         try {
@@ -56,10 +53,7 @@ class NotificationController extends Controller
         }
     }
 
-    /**
-     * PATCH /api/notifications/{id}/read
-     * Mark one notification as read.
-     */
+
     public function markAsRead(Request $request, string $id)
     {
         try {
@@ -88,10 +82,7 @@ class NotificationController extends Controller
         }
     }
 
-    /**
-     * PATCH /api/notifications/read-all
-     * Mark all notifications as read.
-     */
+
     public function markAllAsRead(Request $request)
     {
         try {
@@ -114,10 +105,6 @@ class NotificationController extends Controller
         }
     }
 
-    /**
-     * DELETE /api/notifications/{id}
-     * Delete one notification.
-     */
     public function destroy(Request $request, string $id)
     {
         try {
